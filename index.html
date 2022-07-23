@@ -15,10 +15,12 @@
       <div class="product-display">
         <div class="product-container">
           <div class="product-image">
-            <!-- image goes here -->
+            <img :src="image" alt="">
+            <h3 :style="myStyle">I used 'v-bind' and it's amazing..</h3>
+            <a target="_blank" :href="link">Daha fazla ürün görmek için..</a>
           </div>
           <div class="product-info">
-            <h1>{{ product }}</h1>
+            <h1>{{ product }}</h1>  
           </div>
         </div>
       </div>
