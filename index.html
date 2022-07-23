@@ -9,16 +9,24 @@
     <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
   </head>
   <body>
+    <!-- v-show : This is used for toggling in elements' visibility.
+       Instead of adding and removing the element from the DOM like 'v-if' does , v-show simply toggles the element's visibility.
+       This attribute adding 'display:none'.
+    -->
     <div id="app">
       <div class="nav-bar"></div>
-      
+
       <div class="product-display">
         <div class="product-container">
           <div class="product-image">
-            <img v-bind:src="image">
+            <img v-bind:src="image" />
           </div>
           <div class="product-info">
             <h1>{{ product }}</h1>
+            <p v-if="forSale > 50"> We have a lot of product!</p>
+            <p v-else-if="forSale <50 && forSale > 0">Almost sold out!</p>
+            <p v-else>Out of Stock!</p>
+            <p v-show="loveMe">I love you awesome customer !</p>
           </div>
         </div>
       </div>
@@ -29,7 +37,7 @@
 
     <!-- Mount App -->
     <script>
-      const mountedApp = app.mount('#app')
+      const mountedApp = app.mount("#app");
     </script>
   </body>
 </html>
