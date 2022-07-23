@@ -10,21 +10,31 @@
   </head>
   <body>
     <div id="app">
+
+       <!-- 
+          What happens when our component needs something that outside of itself ? 
+           How to access data from outside the component ? 
+           For example , what if the parent so to speak had this message data and the child needed it ?
+           They can't because component has its own isolated scope, it can't reach up outside of itself to grab something that's outside of its scope.
+
+          So the answer here is props.
+          These are custom attributes for passing data into a component.
+          They function kind of like a funnel into which you can pass the data that component needs.
+        -->
+
       <div class="nav-bar"></div>
 
       <div class="cart">Cart({{ cart }})</div>
-      <product-display :premium="premium"></product-display>
+      <product-display @add-to-cart="updateCart"></product-display>
     </div>
 
     <!-- Import App -->
     <script src="./main.js"></script>
-
-    <!-- Import Components -->
-    <script src="./components/ProductDisplay.js"></script>
+    <script src="components/ProductDisplay.js"></script>
 
     <!-- Mount App -->
     <script>
-      const mountedApp = app.mount('#app')
+      const mountedApp = app.mount("#app");
     </script>
   </body>
 </html>
