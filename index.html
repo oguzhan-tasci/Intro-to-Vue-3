@@ -17,50 +17,35 @@
       <div class="product-display">
         <div class="product-container">
           <div class="product-image">
-            <img v-bind:src="image" />
+            <img :class="{ 'out-of-stock-img': !inStock }" v-bind:src="image" />
           </div>
           <div class="product-info">
-            <h1>{{ product }}</h1>
+            <h1>{{ title }}</h1>
+            <!-- solution -->
+            <p>{{ sale }}</p>
+            <!-- solution -->
             <p v-if="inStock">In Stock</p>
             <p v-else>Out of Stock</p>
             <ul>
               <li v-for="detail in details">{{ detail }}</li>
             </ul>
-            <!-- we're within an object here {} . 
-              Inside of this expression , remember that this style object is all JavaScript. So that why I used camelCase in this property name.
-              Or alternatively, we could use Kebab case but we have to put that property name within quotes (' ') like so.
-              Example : <div :style ="{'background-color' : variant.color}"> </div>>
-            -->
+
             <div
-              v-for="variant in variants"
+              v-for="(variant, index) in variants"
               :key="variant.id"
-              @mouseover="updateImage(variant.image)"
+              @mouseover="updateVariant(index)"
               class="color-circle"
-              :style="{backgroundColor:variant.color}"
-            >
-              <!-- {{ variant.color }} -->
-            </div>
-            <button 
-              class="button" 
-              :class="[inStock ? '' :'out-of-stock-img']"
+              :style="{ backgroundColor: variant.color }"
+            ></div>
+
+            <button
+              class="button"
+              :class="{ disabledButton: !inStock }"
               :disabled="!inStock"
-              @click="addToCart">
+              v-on:click="addToCart"
+            >
               Add to Cart
             </button>
-            
-            <!-- When getting started with class binding, there are some things to note.
-               For example, what happens when we already have an existing class such as 'color-circle' and
-              we wanted to conditionally add an active class based on the truthfulness of active class within our data.(:class="{active: activeClass}")
-              Well, when this actually renders out, those classes are going to be combined like so.
-              <div class = "color-circle active"></div>
-
-              A helpful tool that class binding gives you is the ability to use inline 'ternary operators'.
-              So here, we can use this array syntax and add the active class whenever is active is true.
-              <div :class="[isActive ? activeClass : ' ']">
-
-              ---> 
-
-
           </div>
         </div>
       </div>
