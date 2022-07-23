@@ -11,16 +11,25 @@
   <body>
     <div id="app">
       <div class="nav-bar"></div>
-      
+
       <div class="product-display">
         <div class="product-container">
           <div class="product-image">
-            <img v-bind:src="image">
+            <img v-bind:src="image" />
           </div>
           <div class="product-info">
             <h1>{{ product }}</h1>
             <p v-if="inStock">In Stock</p>
             <p v-else>Out of Stock</p>
+
+            <!-- :key -> This gives each DOM element a unique key 
+              so that Vue can essentially grasp onto the element and not lose track of it
+            -->
+            <div v-for="detail in details">{{detail}}</div>
+            <br>
+            <div v-for="(variant, index) in variants" :key="index">{{variant.color}}</div>
+            <br>
+            <div v-for="(size, index) in sizes" :key="index">{{size}}</div>
           </div>
         </div>
       </div>
@@ -31,7 +40,7 @@
 
     <!-- Mount App -->
     <script>
-      const mountedApp = app.mount('#app')
+      const mountedApp = app.mount("#app");
     </script>
   </body>
 </html>
